@@ -1,6 +1,7 @@
 
 add_library(${CMAKE_PROJECT_NAME}
-    Resolver.cpp
+    Common.cpp
+    DynamicTree.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} 
