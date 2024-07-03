@@ -8,16 +8,20 @@ struct BVHTreeNode final
 {
     [[nodiscard]] constexpr bool IsLeaf() const noexcept 
     {
-        return left == -1 && right == -1;
+        return left == nullptr && right == nullptr;
     }
 
-    AABB aabb;
+    constexpr void FattenAABB(const glm::vec3& margin) const noexcept 
+    {
+        aabb.ExpandTo(margin);
+    }
+
+    AABB aabb; 
     
-    int32_t left;
-    int32_t right;
+    BVHTreeNode* parent = nullptr;
+    BVHTreeNode* left = nullptr;
+    BVHTreeNode* right = nullptr;
 
-    int32_t next;
-
-    void* rigidBody = nullptr;
+    void* userData = nullptr;
 };
 }

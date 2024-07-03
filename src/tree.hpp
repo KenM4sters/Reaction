@@ -12,15 +12,25 @@ public:
 
     ~BVHTree();
 
-    constexpr void InsertNode(BVHTreeNode node) const noexcept;
+    void AddAABB(AABB& aabb, void* userData) const;
 
-    constexpr void Traverse() const noexcept;
+    void RemoveAABB();
+
+    void Traverse() const;
+
+    void Update();
 
 private:
-    BVHTreeNode* mNodes = nullptr;
+
+    void InsertNode();
+    
+    void RemoveNode();
+
+    BVHTreeNode* mRoot = nullptr;
+
+    std::vector<BVHTreeNode*> mInvalidNodes;
 
     TreeSize mNodeCapacity;
     TreeSize mNodeCount;
-    int32_t mRoot;
 };
 }
